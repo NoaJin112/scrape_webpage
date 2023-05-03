@@ -39,6 +39,4 @@ def search(url):
                         print(f"The final download URL: {final_url}\n")
                     
 
-search(url="https://hotelkamer.abunaicon.nl")
-# search(url="https://www.excelvoorbeelden.nl")
-# search(url='https://www.excelvoorbeelden.nl/download/maandkalender-2023')
+search(url="")
