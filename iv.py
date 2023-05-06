@@ -5,6 +5,7 @@ from urllib.parse import urljoin
 import urllib.request as urls
 import ssl
 import sys
+from urllib.error import HTTPError as invalid_url
 
 # This is to bypass the SSL certificate error
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -47,7 +48,10 @@ def search(url):
                             filename = final_url.split('/')[-1]
                             urls.urlretrieve(final_url, filename)
                             print(f'{filename} has been downloaded from {final_url}')
-                    except AttributeError:
+                    except AttributeError:#href_two -> none -> empty
                         print('AttributeError, no more hrefs to be found.')
                         sys.exit()
+                    except invalid_url:
+                        print('Invalid URL, looking for more hrefs......')
+
 search(url="")
