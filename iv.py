@@ -18,9 +18,8 @@ def search(url):
         soup = BeautifulSoup(response.text, "html.parser")
         for link in soup.find_all("a"):
             start_href = link.get("href")
-            print(f"test: {start_href}")
             if start_href.endswith(".xlsx") or start_href.endswith(".xls"):
-                print(f"Sussy links: {start_href}\n")
+                print(f"F-page links: {start_href}\n")
 
 
         for link in soup.find_all("a"):
