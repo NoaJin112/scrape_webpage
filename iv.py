@@ -2,9 +2,16 @@ from bs4 import BeautifulSoup
 import requests
 import time
 from urllib.parse import urljoin
+import urllib.request as urls
+import ssl
+
+
+# This is to bypass the SSL certificate error
+ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def search(url):
+
     while True:
         time.sleep(1)
         response = requests.get(url)
@@ -37,6 +44,12 @@ def search(url):
                         xlsx_file_name = link_two["href"]
                         final_url = urljoin(url, xlsx_file_name)
                         print(f"The final download URL: {final_url}\n")
+                        filename = final_url.split('/')[-1]
+                        urls.urlretrieve(final_url, filename)
+                        print(f'{filename} has been downloaded from {final_url}')
+                    else:
+                        print('Error has risen from the depths of hell, or there are no more .xlsx files.')
+
                     
 
 search(url="")
