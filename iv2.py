@@ -42,26 +42,20 @@ def search(url):
                     href_two = link_two.get("href")
                     try:
                         if href_two.endswith(".xlsx"):
-                            xlsx_file_name = link_two["href"]
-                            final_url = urljoin(url, xlsx_file_name)
-                            print(f"The final download URL: {final_url}\n")
+                            final_url = full_url + ".xlsx"#Change depending on the website source HTML code
+                            # print(f"The final download URL: {final_url}\n")
                             list_with_urls.append(final_url)
+                            print(f"List with urls: {list_with_urls}")
                     except AttributeError:#href_two -> none -> empty
-                        print('AttributeError, no more hrefs to be found, continuing to look for more hrefs......')
+                        print('AttributeError, no more hrefs to be found.')
                     except invalid_url:
-                        print('Invalid URL, continuing to look for more hrefs......')
-    
-        try:
+                        print('Invalid URL, looking for more hrefs......')
+                
             for download_url in list_with_urls:
                 filename = download_url.split('/')[-1]
                 urls.urlretrieve(download_url, filename)
                 print(f'{filename} has been downloaded from {download_url}')
-        except AttributeError:#href_two -> none -> empty
-            print('AttributeError, no more hrefs to be found.')
-            sys.exit()
-        
-
-
+                sys.exit()
                     
                     
 
